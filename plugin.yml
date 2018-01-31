@@ -1,0 +1,10 @@
+author: StupidBot
+version: 1.0.0
+name: eTokens
+main: com.stupidbot.universaltokens.Main
+description: Tokens!
+commands:
+  token:
+    description: Main eTokens command!
+    aliases: [tokens, tokenshop, etoken, etokens]
+    usage: /<command>
