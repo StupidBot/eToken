@@ -11,11 +11,10 @@ import org.bukkit.inventory.ItemStack;
 import com.stupidbot.universaltokens.utils.Tokens;
 
 public class OnPlayerInteract implements Listener {
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onPlayerInteract(PlayerInteractEvent e) {
 		Player player = e.getPlayer();
-		ItemStack item = player.getItemInHand();
+		ItemStack item = player.getInventory().getItemInMainHand();
 
 		if (e.getAction() == Action.RIGHT_CLICK_AIR || e.getAction() == Action.RIGHT_CLICK_BLOCK)
 			if (item != null)
@@ -23,7 +22,7 @@ public class OnPlayerInteract implements Listener {
 					if (item.getItemMeta().hasDisplayName())
 						if (item.getItemMeta().getDisplayName() == "§eToken") {
 							Tokens.give(player, item.getAmount(), false);
-							player.setItemInHand(new ItemStack(Material.AIR));
+							player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
 						}
 	}
 }

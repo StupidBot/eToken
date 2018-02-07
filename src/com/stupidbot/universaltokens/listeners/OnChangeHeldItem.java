@@ -1,5 +1,6 @@
 package com.stupidbot.universaltokens.listeners;
 
+import org.bukkit.GameMode;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -37,7 +38,8 @@ public class OnChangeHeldItem implements Listener {
 				&& player.hasPotionEffect(PotionEffectType.NIGHT_VISION))
 			player.removePotionEffect(PotionEffectType.NIGHT_VISION);
 
-		if ((item == null || !(item.containsEnchantment(CustomEnchantment.FLY))) && player.getAllowFlight())
+		if ((item == null || !(item.containsEnchantment(CustomEnchantment.FLY))) && player.getAllowFlight()
+				&& player.getGameMode() == GameMode.SURVIVAL)
 			player.setAllowFlight(false);
 
 		if ((item == null || !(item.containsEnchantment(CustomEnchantment.JUMP)))

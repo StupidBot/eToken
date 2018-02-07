@@ -21,7 +21,6 @@ import com.stupidbot.universaltokens.utils.Text;
 import com.stupidbot.universaltokens.utils.Tokens;
 
 public class OnCommand implements CommandExecutor {
-	@SuppressWarnings("deprecation")
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("token"))
 			if (args.length > 0 && (args[0].equalsIgnoreCase("bal") || args[0].equalsIgnoreCase("balance")
@@ -40,7 +39,7 @@ public class OnCommand implements CommandExecutor {
 				else if (args[0].equalsIgnoreCase("shop"))
 					if (sender instanceof Player) {
 						Player player = (Player) sender;
-						ItemStack item = player.getItemInHand();
+						ItemStack item = player.getInventory().getItemInMainHand();
 
 						Inventories.openTokenShop(player);
 
@@ -50,7 +49,7 @@ public class OnCommand implements CommandExecutor {
 									|| item.getType() == Material.DIAMOND_PICKAXE
 									|| item.getType() == Material.GOLD_PICKAXE) {
 								Inventories.updateTokenShop(player, item);
-								player.setItemInHand(new ItemStack(Material.AIR));
+								player.getInventory().setItemInMainHand(new ItemStack(Material.AIR));
 							}
 					} else
 						sender.sendMessage("§cThis command can only be run by a player.");

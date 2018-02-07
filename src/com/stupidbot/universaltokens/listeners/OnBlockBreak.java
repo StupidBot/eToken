@@ -18,13 +18,11 @@ import com.stupidbot.universaltokens.utils.Tokens;
 import com.stupidbot.universaltokens.utils.enchant.CustomEnchantment;
 
 public class OnBlockBreak implements Listener {
-
-	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void onBlockBreak(BlockBreakEvent e) {
 		Player player = e.getPlayer();
 		Block block = e.getBlock();
-		ItemStack item = player.getItemInHand();
+		ItemStack item = player.getInventory().getItemInMainHand();
 		Location blockCenter = block.getLocation().add(0.5, 0.5, 0.5);
 		FileConfiguration config = Main.getInstance().getConfig();
 		double tokenChance = config.getDouble("Tokens.Chance");
