@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -64,6 +65,8 @@ public class OnCommand implements CommandExecutor {
 								int args1 = Integer.parseInt(args[1]);
 
 								if (!(args1 > tokens)) {
+									Location loc = player.getLocation();
+									boolean hasSentFullMsg = false;
 									ItemStack token = new ItemStack(Material.MAGMA_CREAM);
 									ItemMeta tokenMeta = token.getItemMeta();
 									tokenMeta.setDisplayName("§eToken");
@@ -75,14 +78,23 @@ public class OnCommand implements CommandExecutor {
 									token.setItemMeta(tokenMeta);
 
 									for (int i = 0; i < args1; i++)
-										player.getInventory().addItem(token);
+										if (player.getInventory().firstEmpty() != -1)
+											player.getInventory().addItem(token);
+										else {
+											if (!(hasSentFullMsg)) {
+												hasSentFullMsg = true;
+												player.sendMessage("§cInventory full! Some items dropped.");
+											}
+
+											loc.getWorld().dropItemNaturally(loc, token);
+										}
 
 									file.set("Stats.Tokens", tokens - args1);
 									FileStorage.updateCachedPlayerFile(player, file);
 									player.sendMessage("§6" + Text.formatInt(args1) + " §aTokens withdrawn.");
 								} else
 									player.sendMessage("§cYou do not have enough tokens to do that.");
-							} catch (Exception e) {
+							} catch (NumberFormatException e) {
 								player.sendMessage("§6" + args[1] + " §cis not a valid number.");
 							}
 						} else
@@ -95,13 +107,16 @@ public class OnCommand implements CommandExecutor {
 							Player giveTo = Bukkit.getPlayer(args[1]);
 
 							if (giveTo != null) {
-								int amount = Integer.parseInt(args[2]);
+								boolean updateTotal = Main.getInstance().getConfig()
+										.getBoolean("UpdateTotalTokensOnGiveCommand");
 
 								try {
-									Tokens.give(giveTo, amount, false);
+									int amount = Integer.parseInt(args[2]);
+
+									Tokens.give(giveTo, amount, updateTotal);
 									sender.sendMessage("§aGave §6" + giveTo.getName() + " §e" + Text.formatInt(amount)
 											+ " §aTokens!");
-								} catch (Exception e) {
+								} catch (NumberFormatException e) {
 									sender.sendMessage("§6" + args[2] + " §cis not a valid number.");
 								}
 							} else
@@ -113,14 +128,18 @@ public class OnCommand implements CommandExecutor {
 				} else if (args[0].equalsIgnoreCase("giveall")) {
 					if (sender.hasPermission(new Permission("UniversalTokens.Admin")))
 						if (args.length > 1) {
-							int amount = Integer.parseInt(args[1]);
+							boolean updateTotal = Main.getInstance().getConfig()
+									.getBoolean("UpdateTotalTokensOnGiveCommand");
 
 							try {
+								int amount = Integer.parseInt(args[1]);
+
 								for (Player all : Bukkit.getOnlinePlayers())
-									Tokens.give(all, amount, false);
+									Tokens.give(all, amount, updateTotal);
+
 								sender.sendMessage("§aGave §6everyone §e" + Text.formatInt(amount) + " §aTokens!");
-							} catch (Exception e) {
-								sender.sendMessage("§6" + args[2] + " §cis not a valid number.");
+							} catch (NumberFormatException e) {
+								sender.sendMessage("§6" + args[1] + " §cis not a valid number.");
 							}
 						} else
 							sender.sendMessage("§cIncorrect usage! /" + label + " giveall <amount>.");

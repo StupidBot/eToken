@@ -242,6 +242,32 @@ public class OnInventoryClick implements Listener {
 							player.playSound(player.getLocation(), Sound.BLOCK_DISPENSER_FAIL, 0.5f, 1f);
 							player.sendMessage("§cThis enchant is already maxed.");
 						}
+					} else if (clicked.getItemMeta().getDisplayName().contains("Explosive")) {
+						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
+							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
+									.replaceAll("[^\\d]", ""));
+							if (file.getInt("Stats.Tokens") >= cost) {
+								ItemStack pick = player.getOpenInventory().getTopInventory().getItem(22);
+								int lvl = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getDisplayName())
+										.replaceAll("[^\\d]", ""));
+
+								pick.addUnsafeEnchantment(CustomEnchantment.EXPLOSIVE, lvl);
+								file.set("Stats.Tokens", file.getInt("Stats.Tokens") - cost);
+								FileStorage.updateCachedPlayerFile(player, file);
+								Inventories.updateTokenShop(player,
+										Text.updateLore(pick, CustomEnchantment.EXPLOSIVE, lvl));
+
+								player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 0.5f, 0.5f);
+								player.sendMessage("§aExplosive levelled up!");
+							} else {
+								player.playSound(player.getLocation(), Sound.BLOCK_DISPENSER_FAIL, 0.5f, 1f);
+								player.sendMessage("§cYou can't afford this, mine to get tokens.");
+							}
+						} else {
+							player.playSound(player.getLocation(), Sound.BLOCK_DISPENSER_FAIL, 0.5f, 1f);
+							player.sendMessage("§cThis enchant is already maxed.");
+						}
 					}
 					e.setCancelled(true);
 				}

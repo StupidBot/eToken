@@ -36,6 +36,7 @@ public class FileStorage {
 		config.addDefault("Enchants.Speed.MaxLevel", 3);
 		config.addDefault("Enchants.Fortune.PricePerLevel", 80);
 		config.addDefault("Enchants.Fortune.MaxLevel", 200);
+		config.addDefault("UpdateTotalTokensOnGiveCommand", false);
 		config.addDefault("FormatNumbers", true);
 
 		config.options().copyDefaults(true);

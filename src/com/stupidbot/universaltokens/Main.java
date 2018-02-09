@@ -3,6 +3,7 @@ package com.stupidbot.universaltokens;
 import java.io.IOException;
 import java.util.Map;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
@@ -27,7 +28,7 @@ public class Main extends JavaPlugin implements Listener {
 	public void onDisable() {
 		Map<Player, FileConfiguration> playerFiles = FileStorage.getCachedFiles();
 
-		for (Player all : playerFiles.keySet()) {
+		for (Player all : Bukkit.getOnlinePlayers()) {
 			FileConfiguration file = playerFiles.get(all);
 			try {
 				FileStorage.savePlayerFile(all, file);
