@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -13,7 +14,7 @@ import org.bukkit.entity.Player;
 import com.stupidbot.universaltokens.Main;
 
 public class FileStorage {
-	private static Map<Player, FileConfiguration> playerFiles = new HashMap<Player, FileConfiguration>();
+	private static Map<UUID, FileConfiguration> playerFiles = new HashMap<UUID, FileConfiguration>();
 
 	public static void setup() throws IOException {
 		Main instance = Main.getInstance();
@@ -71,17 +72,17 @@ public class FileStorage {
 		FileConfiguration file = YamlConfiguration.loadConfiguration(new File(Main.getInstance().getDataFolder()
 				+ File.separator + "player_data" + File.separator + player.getUniqueId().toString() + ".yml"));
 
-		playerFiles.put(player, file);
+		playerFiles.put(player.getUniqueId(), file);
 	}
 
 	public static void updateCachedPlayerFile(Player player, FileConfiguration file) {
-		playerFiles.put(player, file);
+		playerFiles.put(player.getUniqueId(), file);
 	}
 
 	public static void savePlayerFile(Player player, FileConfiguration file) throws IOException {
 		file.save(new File(Main.getInstance().getDataFolder() + File.separator + "player_data" + File.separator
 				+ player.getUniqueId().toString() + ".yml"));
-		playerFiles.remove(player);
+		playerFiles.remove(player.getUniqueId());
 	}
 
 	private static File getPlayerFile(Player player) {
@@ -89,7 +90,7 @@ public class FileStorage {
 				+ player.getUniqueId().toString() + ".yml");
 	}
 
-	public static Map<Player, FileConfiguration> getCachedFiles() {
+	public static Map<UUID, FileConfiguration> getCachedFiles() {
 		return playerFiles;
 	}
 }

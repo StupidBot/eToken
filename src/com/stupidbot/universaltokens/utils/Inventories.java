@@ -20,7 +20,7 @@ import com.stupidbot.universaltokens.utils.enchant.CustomEnchantment;
 public class Inventories {
 	public static void openTokenShop(Player player) {
 		Inventory inv = Bukkit.createInventory(null, 54, "§5Token Shop");
-		FileConfiguration file = FileStorage.getCachedFiles().get(player);
+		FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
 
 		ItemStack border = new ItemStack(Material.STAINED_GLASS_PANE, 1, (byte) 15);
 		ItemMeta borderMeta = border.getItemMeta();
@@ -71,7 +71,7 @@ public class Inventories {
 
 	public static void updateTokenShop(Player player, ItemStack pick) {
 		Inventory inv = player.getOpenInventory().getTopInventory();
-		FileConfiguration file = FileStorage.getCachedFiles().get(player);
+		FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
 		FileConfiguration config = Main.getInstance().getConfig();
 
 		ItemStack skull = new ItemStack(Material.SKULL_ITEM, 1, (byte) 3);

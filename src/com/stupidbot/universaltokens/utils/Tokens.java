@@ -5,7 +5,7 @@ import org.bukkit.entity.Player;
 
 public class Tokens {
 	public static void give(Player player, int amount, boolean updateTotal) {
-		FileConfiguration file = FileStorage.getCachedFiles().get(player);
+		FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
 		boolean positive = amount > 0;
 
 		file.set("Stats.Tokens", file.getInt("Stats.Tokens") + amount);

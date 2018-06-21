@@ -16,7 +16,7 @@ public class OnQuit implements Listener {
 	@EventHandler
 	public void onQuit(PlayerQuitEvent e) throws IOException {
 		Player player = e.getPlayer();
-		FileConfiguration file = FileStorage.getCachedFiles().get(player);
+		FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
 
 		FileStorage.savePlayerFile(player, file);
 

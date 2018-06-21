@@ -36,7 +36,8 @@ public class OnInventoryClick implements Listener {
 						Inventories.openTokenShop(player);
 					else if (clicked.getItemMeta().getDisplayName().contains("Efficiency"))
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -61,7 +62,8 @@ public class OnInventoryClick implements Listener {
 						}
 					else if (clicked.getItemMeta().getDisplayName().contains("Unbreaking")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -86,7 +88,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Never Break")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -119,7 +122,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Night Vision")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -144,7 +148,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Fly")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -168,7 +173,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Jump")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -193,7 +199,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Speed")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -219,7 +226,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Fortune")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {
@@ -244,7 +252,8 @@ public class OnInventoryClick implements Listener {
 						}
 					} else if (clicked.getItemMeta().getDisplayName().contains("Explosive")) {
 						if (!(clicked.getItemMeta().getLore().get(0).contains("ENCHANT MAXED"))) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
+
 							int cost = Integer.parseInt(ChatColor.stripColor(clicked.getItemMeta().getLore().get(0))
 									.replaceAll("[^\\d]", ""));
 							if (file.getInt("Stats.Tokens") >= cost) {

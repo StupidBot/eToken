@@ -33,7 +33,7 @@ public class OnCommand implements CommandExecutor {
 						Player player = (Player) sender;
 
 						player.sendMessage("§eTokens: §a"
-								+ Text.formatInt(FileStorage.getCachedFiles().get(player).getInt("Stats.Tokens")));
+								+ Text.formatInt(FileStorage.getCachedFiles().get(player.getUniqueId()).getInt("Stats.Tokens")));
 
 					} else
 						sender.sendMessage("§cThis command can only be run by a player.");
@@ -58,7 +58,7 @@ public class OnCommand implements CommandExecutor {
 					if (sender instanceof Player) {
 						Player player = (Player) sender;
 						if (args.length > 1) {
-							FileConfiguration file = FileStorage.getCachedFiles().get(player);
+							FileConfiguration file = FileStorage.getCachedFiles().get(player.getUniqueId());
 							int tokens = file.getInt("Stats.Tokens");
 
 							try {
@@ -158,7 +158,7 @@ public class OnCommand implements CommandExecutor {
 				player.sendMessage(Text.center("§d§m===============§b§m===============", 131));
 				Text.sendJSON(
 						"[\"\",{\"text\":\"" + Text.center("§c§lHELP§r §7- §aClick or Hover for info", 131)
-								+ "\",\"clickEvent\":{\"action\":\"open_url\",\"value\":\"https://github.com/StupidBot/eTokens\"},\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"§eeTokens §7is an open source plugin\ndeveloped by §aStupidBot §7and\n§7made for §cECLIPSE NETWORK §d§lCLICK\n§d§lHERE§7 to view the code on GitHub.\"}]}}}]",
+								+ "\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":{\"text\":\"\",\"extra\":[{\"text\":\"§eeTokens v1.1.0 §7is a plugin\ndeveloped by §aStupidBot §7and\n§7made for §cECLIPSE NETWORK§7.\"}]}}}]",
 						player);
 				player.sendMessage(" ");
 				Text.sendJSON(
